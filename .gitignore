@@ -9,3 +9,6 @@ application-local.properties
 .mvn/
 mvnw
 mvnw.cmd
+
+*.pdf
+test_report.pdf
