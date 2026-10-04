@@ -1,0 +1,62 @@
+{
+  "code": "AKTU_BTECH_SAMPLE",
+  "university": "AKTU",
+  "program": "B.Tech",
+  "version": "0.1-sample",
+  "verified": false,
+  "source": "TODO: cite official ordinance clause numbers here",
+  "semesterCount": 8,
+  "totalCreditsRequired": 160,
+  "semesterCreditPlan": [20, 20, 22, 22, 22, 22, 16, 16],
+  "gradeScale": [
+    {"grade": "O", "points": 10},
+    {"grade": "A+", "points": 9},
+    {"grade": "A", "points": 8},
+    {"grade": "B+", "points": 7},
+    {"grade": "B", "points": 6},
+    {"grade": "C", "points": 5},
+    {"grade": "D", "points": 4},
+    {"grade": "F", "points": 0}
+  ],
+  "passMinPoints": 4,
+  "promotion": {
+    "defaultMaxCarryPapers": 5,
+    "overrides": [
+      {"toSemester": 3, "maxCarryPapers": 6}
+    ]
+  },
+  "maxDurationYears": 6,
+  "passMarks": {
+    "theoryTotal": 100,
+    "theoryPass": 40,
+    "practicalTotal": 50,
+    "practicalPass": 20
+  },
+  "examCycles": [
+    {"type": "EVEN_SEM",   "approxMonth": 6},
+    {"type": "CARRY_OVER", "approxMonth": 9},
+    {"type": "ODD_SEM",    "approxMonth": 12},
+    {"type": "CARRY_OVER", "approxMonth": 3}
+  ],
+  "resultDelayDays": {
+    "regular":   {"min": 30, "max": 60},
+    "carryOver": {"min": 45, "max": 60}
+  },
+  "maxCarryClearsPerCycle": 6,
+  "revaluation": {
+    "feePerPaperINR": 500,
+    "nearMissMarks": 5
+  },
+  "statusCodes": [
+    {"code": "PCP", "label": "Promoted with carry-over paper", "configured": true},
+    {"code": "UFM", "label": "Meaning not configured", "configured": false},
+    {"code": "INC", "label": "Meaning not configured", "configured": false},
+    {"code": "PWG", "label": "Meaning not configured", "configured": false}
+  ],
+  "events": [
+    {"type": "EXAM_FORM", "label": "Exam form window (odd semester)", "approxStart": "09-15", "approxEnd": "10-15"},
+    {"type": "EXAM_FORM", "label": "Exam form window (even semester)", "approxStart": "03-01", "approxEnd": "04-05"},
+    {"type": "CARRY_FORM", "label": "Carry-over registration", "approxStart": "02-01", "approxEnd": "02-28"},
+    {"type": "REVAL", "label": "Revaluation window after result", "approxStart": null, "approxEnd": null, "relativeToResultDays": 15}
+  ]
+}

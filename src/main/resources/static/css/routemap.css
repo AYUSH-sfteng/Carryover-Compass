@@ -1,0 +1,113 @@
+.routemap-container {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  position: relative;
+  overflow-x: auto;
+}
+
+.routemap-svg {
+  width: 100%;
+  height: 380px;
+  display: block;
+}
+
+.route-line {
+  stroke: var(--route);
+  stroke-width: 4px;
+  stroke-linecap: round;
+  fill: none;
+  transition: stroke-dashoffset 900ms ease-out;
+}
+
+.route-line-future {
+  stroke: var(--line);
+  stroke-width: 3px;
+  stroke-dasharray: 6 6;
+  fill: none;
+}
+
+.spur-line {
+  stroke: var(--carry);
+  stroke-width: 3px;
+  fill: none;
+}
+
+.station-circle {
+  transition: r 200ms ease;
+  cursor: pointer;
+}
+
+.station-circle.cleared {
+  fill: var(--route);
+  stroke: var(--surface);
+  stroke-width: 3px;
+}
+
+.station-circle.has-carry {
+  fill: var(--route);
+  stroke: var(--carry);
+  stroke-width: 4px;
+}
+
+.station-circle.current {
+  fill: var(--surface);
+  stroke: var(--route);
+  stroke-width: 5px;
+}
+
+.station-circle.future {
+  fill: var(--surface);
+  stroke: var(--line);
+  stroke-width: 2px;
+}
+
+.station-label {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--ink);
+  text-anchor: middle;
+}
+
+.station-sublabel {
+  font-family: var(--font-body);
+  font-size: 11px;
+  fill: var(--ink-soft);
+  text-anchor: middle;
+}
+
+.spur-box {
+  fill: #FFF8E6;
+  stroke: var(--carry);
+  stroke-width: 1.5px;
+  rx: 4px;
+  ry: 4px;
+}
+
+.spur-text {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--carry);
+  text-anchor: middle;
+}
+
+.terminal-degree {
+  fill: var(--surface);
+  stroke: var(--route);
+  stroke-width: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-line {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .routemap-svg {
+    height: 600px;
+  }
+}

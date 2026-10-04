@@ -1,0 +1,128 @@
+.app-header {
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--line);
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.brand-logo {
+  width: 28px;
+  height: 28px;
+}
+
+.brand-title {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.badge-unverified {
+  background-color: #FFF8E6;
+  color: var(--carry);
+  border: 1px solid var(--carry);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.nav-tabs-wrapper {
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--line);
+  padding: 0 var(--space-lg);
+  overflow-x: auto;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: var(--space-lg);
+  list-style: none;
+}
+
+.nav-tab {
+  padding: var(--space-md) 0;
+  border-bottom: 3px solid transparent;
+  color: var(--ink-soft);
+  font-weight: 500;
+  cursor: pointer;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  white-space: nowrap;
+}
+
+.nav-tab:hover {
+  color: var(--ink);
+}
+
+.nav-tab.active {
+  color: var(--route);
+  border-bottom-color: var(--route);
+  font-weight: 700;
+}
+
+.main-content {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: var(--space-lg);
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+.two-column-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-lg);
+}
+
+@media (max-width: 1023px) {
+  .two-column-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.app-footer {
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+  border-top: 1px solid var(--line);
+  margin-top: var(--space-xl);
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.disclaimer-banner {
+  background-color: #F8FAFC;
+  border: 1px solid var(--line);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: var(--space-md);
+}

@@ -1,0 +1,23 @@
+{
+ "code": "AKTU_BTECH_SAMPLE",
+ "verified": false,
+ "semesterCount": 8,
+ "totalCredits": 160,
+ "semesterCredits": [20, 20, 22, 22, 22, 22, 16, 16],
+ "grades": {"O": 10, "A+": 9, "A": 8, "B+": 7, "B": 6, "C": 5, "D": 4, "F": 0, "ABS": 0},
+ "passMinPoints": 4,
+ "maxCarryForPromotion": 5,
+ "maxDurationYears": 6,
+ "maxClearsPerCycle": 6,
+ "passMarksTheory": 40,
+ "passMarksPractical": 20,
+ "nearMissMarks": 5,
+ "revalFeeINR": 500,
+ "cycles": [
+  {"type": "EVEN", "month": 6},
+  {"type": "CARRY", "month": 9},
+  {"type": "ODD", "month": 12},
+  {"type": "CARRY", "month": 3}
+ ],
+ "resultDelayDays": 50
+}

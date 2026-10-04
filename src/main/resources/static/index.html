@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarryOver Compass</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="loader">
+        <div class="loader-line"></div>
+    </div>
+
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <nav class="top-nav">
+        <div class="nav-left">
+            <svg class="logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+            </svg>
+            <span class="nav-title">CarryOver Compass</span>
+        </div>
+        <div class="nav-center">
+            <a href="#dashboard" class="nav-link">Dashboard</a>
+            <a href="#route" class="nav-link">Route</a>
+            <a href="#whatif" class="nav-link">What-if</a>
+            <a href="#reval" class="nav-link">Revaluation</a>
+        </div>
+        <div class="nav-right">
+            <span class="badge warning">Sample rules, not verified</span>
+            <button class="btn ghost" onclick="toggleDrawer()">My results</button>
+        </div>
+    </nav>
+
+    <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+    <div class="drawer" id="drawer">
+        <div class="drawer-header">
+            <h2>My Results</h2>
+            <button class="btn icon" onclick="toggleDrawer()">&times;</button>
+        </div>
+        <div class="drawer-content">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" id="studentName">
+            </div>
+            <div class="form-group">
+                <label>Admission Year</label>
+                <input type="number" id="admYear" min="2010" max="2030">
+            </div>
+            <div class="form-group">
+                <label>Last Completed Sem</label>
+                <input type="number" id="lastSem" min="0" max="8">
+            </div>
+            <h3>Subjects</h3>
+            <div id="subjectsContainer"></div>
+            <button class="btn outline mt-1" onclick="addSubjectRow()">+ Add Subject</button>
+            <div class="drawer-actions mt-2">
+                <button class="btn primary" onclick="saveMyResults()">Apply</button>
+                <button class="btn ghost" onclick="clearMyResults()">Clear</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <svg class="hero-route-svg" preserveAspectRatio="none" viewBox="0 0 1000 500">
+            <path class="hero-route-path" d="M 0,250 C 200,350 300,100 500,250 C 700,400 800,150 1000,250"></path>
+        </svg>
+        <div class="hero-content" style="position: relative; z-index: 10;">
+            <h1 id="heroTitle">Apne backlog ka rasta dekho.</h1>
+            <p class="hero-sub">AKTU B.Tech students ke liye. Result daalo, aur ek nazar mein dekho degree kab milegi aur kya karna sahi rahega.</p>
+            <div class="hero-ctas">
+                <button class="btn primary magnetic" onclick="loadDemo()">Load demo student</button>
+                <button class="btn ghost" onclick="toggleDrawer()">Enter my results</button>
+            </div>
+        </div>
+        <div class="scroll-cue">↓ Scroll</div>
+    </section>
+
+    <div class="marquee">
+        <div class="marquee-content">
+            Carry papers &middot; Credits &middot; Promotion &middot; What-if plans &middot; Revaluation &middot; Deadlines &middot; 
+            Carry papers &middot; Credits &middot; Promotion &middot; What-if plans &middot; Revaluation &middot; Deadlines &middot; 
+        </div>
+    </div>
+
+    <div id="emptyState" class="empty-state">
+        <p>Abhi koi data nahi. Demo student load karo ya apne results daalo.</p>
+    </div>
+
+    <div id="appContent" style="display: none;">
+        <section class="dashboard" id="dashboard">
+            <div class="panel tilt" id="panelCredits">
+                <h3>Credits</h3>
+                <div class="credits-visual">
+                    <svg viewBox="0 0 100 100" class="ring-svg">
+                        <circle class="ring-bg" cx="50" cy="50" r="45"></circle>
+                        <circle class="ring-fill" id="creditsRing" cx="50" cy="50" r="45"></circle>
+                    </svg>
+                    <div class="credits-text">
+                        <span id="creditsEarned" class="num">0</span>
+                        <span class="sub">/ <span id="creditsReq">160</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel tilt">
+                <h3>CGPA</h3>
+                <div class="num big" id="cgpaVal">0.00</div>
+            </div>
+            <div class="panel tilt">
+                <h3>Backlogs</h3>
+                <div class="num risk-text" id="backlogCount">0</div>
+                <div class="chips mt-1" id="backlogChips"></div>
+            </div>
+            <div class="panel tilt">
+                <h3>Promotion</h3>
+                <div id="promoStatus" class="promo-text">...</div>
+                <div class="badge mt-1" id="riskBadge">LOW RISK</div>
+                <ul class="risk-reasons mt-1" id="riskReasons"></ul>
+            </div>
+            <div class="panel wide highlight tilt">
+                <h3>Next Step</h3>
+                <p id="nextActionText" class="big-p">...</p>
+            </div>
+        </section>
+
+        <section class="route-section" id="route">
+            <div class="route-sticky">
+                <h2>The Route Map</h2>
+                <div class="route-container">
+                    <svg class="route-line-svg" preserveAspectRatio="none" viewBox="0 0 1000 100">
+                        <path id="mainRoutePath" class="route-path-bg" d="M 50 50 L 950 50"></path>
+                        <path id="mainRouteFill" class="route-path-fill" d="M 50 50 L 950 50"></path>
+                    </svg>
+                    <div id="routeStations" class="route-stations"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="whatif" id="whatif">
+            <h2>What-If Simulator</h2>
+            <div class="slider-container">
+                <label>Papers I can clear per cycle: <span id="clearsVal">2</span></label>
+                <input type="range" id="clearsSlider" min="0" max="6" value="2" oninput="updateClears(this.value)">
+            </div>
+            <div class="plans-container" id="plansContainer"></div>
+        </section>
+
+        <section class="reval" id="reval">
+            <h2>Revaluation Radar</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Marks</th>
+                            <th>Pass</th>
+                            <th>Verdict</th>
+                        </tr>
+                    </thead>
+                    <tbody id="revalBody"></tbody>
+                </table>
+            </div>
+            <p class="fee-text mt-1">Total Fee Estimate: ₹<span id="revalFee">0</span></p>
+            <p class="note">Heuristic hai. Marks badhne ki guarantee nahi.</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>Your data stays in your browser.</p>
+        <p class="disclaimer">Ye ek estimate hai. Final confirmation AKTU ERP/ordinance se karo.</p>
+        <div class="badge warning mt-1">Sample rules, not verified</div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        navLinks.forEach(l => {
+                            l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id);
+                        });
+                    }
+                });
+            }, { rootMargin: '-20% 0px -80% 0px' });
+            sections.forEach(s => obs.observe(s));
+        });
+    </script>
+</body>
+</html>
