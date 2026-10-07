@@ -1,38 +1,511 @@
 {
   "name": "Aarav (demo)",
-  "admissionYear": 2024,
-  "lastCompletedSemester": 4,
+  "admissionYear": 2022,
+  "lastCompletedSemester": 8,
   "subjects": [
-    {"code": "BAS101", "name": "Physics", "semester": 1, "credits": 4, "type": "THEORY", "grade": "B", "marks": 60},
-    {"code": "BAS102", "name": "Maths I", "semester": 1, "credits": 4, "type": "THEORY", "grade": "C", "marks": 52},
-    {"code": "BEE101", "name": "Electrical", "semester": 1, "credits": 3, "type": "THEORY", "grade": "B+", "marks": 68},
-    {"code": "BCS101", "name": "Programming", "semester": 1, "credits": 3, "type": "THEORY", "grade": "A", "marks": 75},
-    {"code": "BAS151", "name": "Physics Lab", "semester": 1, "credits": 1, "type": "PRACTICAL", "grade": "A+", "marks": 90},
-    {"code": "BEE151", "name": "Electrical Lab", "semester": 1, "credits": 1, "type": "PRACTICAL", "grade": "A", "marks": 85},
-    {"code": "BCS151", "name": "Programming Lab", "semester": 1, "credits": 1, "type": "PRACTICAL", "grade": "O", "marks": 95},
-    
-    {"code": "BAS201", "name": "Chemistry", "semester": 2, "credits": 4, "type": "THEORY", "grade": "B", "marks": 61},
-    {"code": "BAS202", "name": "Maths II", "semester": 2, "credits": 4, "type": "THEORY", "grade": "F", "marks": 38},
-    {"code": "BME201", "name": "Mechanical", "semester": 2, "credits": 3, "type": "THEORY", "grade": "C", "marks": 50},
-    {"code": "BEC201", "name": "Electronics", "semester": 2, "credits": 3, "type": "THEORY", "grade": "B+", "marks": 67},
-    {"code": "BAS251", "name": "Chemistry Lab", "semester": 2, "credits": 1, "type": "PRACTICAL", "grade": "A", "marks": 80},
-    {"code": "BME251", "name": "Mechanical Lab", "semester": 2, "credits": 1, "type": "PRACTICAL", "grade": "B+", "marks": 72},
-    {"code": "BEC251", "name": "Electronics Lab", "semester": 2, "credits": 1, "type": "PRACTICAL", "grade": "A+", "marks": 89},
-
-    {"code": "BCS301", "name": "Data Structures", "semester": 3, "credits": 4, "type": "THEORY", "grade": "F", "marks": 15},
-    {"code": "BCS302", "name": "COA", "semester": 3, "credits": 4, "type": "THEORY", "grade": "B", "marks": 64},
-    {"code": "BCS303", "name": "Discrete Maths", "semester": 3, "credits": 4, "type": "THEORY", "grade": "C", "marks": 53},
-    {"code": "BHS301", "name": "Universal Human Values", "semester": 3, "credits": 3, "type": "THEORY", "grade": "A", "marks": 78},
-    {"code": "BCS351", "name": "Data Structures Lab", "semester": 3, "credits": 1, "type": "PRACTICAL", "grade": "A+", "marks": 91},
-    {"code": "BCS352", "name": "COA Lab", "semester": 3, "credits": 1, "type": "PRACTICAL", "grade": "A", "marks": 84},
-    {"code": "BCS353", "name": "Mini Project", "semester": 3, "credits": 2, "type": "PRACTICAL", "grade": "O", "marks": 96},
-
-    {"code": "BCS401", "name": "OS", "semester": 4, "credits": 4, "type": "THEORY", "grade": "B+", "marks": 68},
-    {"code": "BCS402", "name": "TAFL", "semester": 4, "credits": 4, "type": "THEORY", "grade": "F", "marks": 39},
-    {"code": "BCS403", "name": "Microprocessor", "semester": 4, "credits": 4, "type": "THEORY", "grade": "C", "marks": 55},
-    {"code": "BCC401", "name": "Cyber Security", "semester": 4, "credits": 3, "type": "THEORY", "grade": "B", "marks": 62},
-    {"code": "BCS451", "name": "OS Lab", "semester": 4, "credits": 1, "type": "PRACTICAL", "grade": "A", "marks": 86},
-    {"code": "BCS452", "name": "TAFL Lab", "semester": 4, "credits": 1, "type": "PRACTICAL", "grade": "B+", "marks": 75},
-    {"code": "BCS453", "name": "Microprocessor Lab", "semester": 4, "credits": 2, "type": "PRACTICAL", "grade": "A+", "marks": 92}
+    {
+      "code": "BAS101",
+      "name": "Physics",
+      "semester": 1,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "B",
+      "marks": 62
+    },
+    {
+      "code": "BAS102",
+      "name": "Maths I",
+      "semester": 1,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "C",
+      "marks": 55
+    },
+    {
+      "code": "BEE101",
+      "name": "Electrical",
+      "semester": 1,
+      "credits": 3,
+      "type": "THEORY",
+      "grade": "B",
+      "marks": 67
+    },
+    {
+      "code": "BCS101",
+      "name": "Programming",
+      "semester": 1,
+      "credits": 3,
+      "type": "THEORY",
+      "grade": "B",
+      "marks": 68
+    },
+    {
+      "code": "BAS151",
+      "name": "Physics Lab",
+      "semester": 1,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "B",
+      "marks": 65
+    },
+    {
+      "code": "BEE151",
+      "name": "Electrical Lab",
+      "semester": 1,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "B+",
+      "marks": 75
+    },
+    {
+      "code": "BCS151",
+      "name": "Programming Lab",
+      "semester": 1,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "C",
+      "marks": 58
+    },
+    {
+      "code": "BCE151",
+      "name": "Engg Graphics",
+      "semester": 1,
+      "credits": 3,
+      "type": "PRACTICAL",
+      "grade": "B+",
+      "marks": 74
+    },
+    {
+      "code": "BAS201",
+      "name": "Chemistry",
+      "semester": 2,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "C",
+      "marks": 58
+    },
+    {
+      "code": "BAS202",
+      "name": "Maths II",
+      "semester": 2,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "F",
+      "marks": 38
+    },
+    {
+      "code": "BME201",
+      "name": "Mechanical",
+      "semester": 2,
+      "credits": 3,
+      "type": "THEORY",
+      "grade": "B",
+      "marks": 68
+    },
+    {
+      "code": "BEC201",
+      "name": "Electronics",
+      "semester": 2,
+      "credits": 3,
+      "type": "THEORY",
+      "grade": "B+",
+      "marks": 74
+    },
+    {
+      "code": "BAS251",
+      "name": "Chemistry Lab",
+      "semester": 2,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "B",
+      "marks": 65
+    },
+    {
+      "code": "BME251",
+      "name": "Mechanical Lab",
+      "semester": 2,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "B+",
+      "marks": 70
+    },
+    {
+      "code": "BEC251",
+      "name": "Electronics Lab",
+      "semester": 2,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "B+",
+      "marks": 70
+    },
+    {
+      "code": "BCS251",
+      "name": "C Prog Lab",
+      "semester": 2,
+      "credits": 3,
+      "type": "PRACTICAL",
+      "grade": "B",
+      "marks": 68
+    },
+    {
+      "code": "BCS301",
+      "name": "Data Structures",
+      "semester": 3,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "F",
+      "marks": 22
+    },
+    {
+      "code": "BCS302",
+      "name": "COA",
+      "semester": 3,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "B+",
+      "marks": 75
+    },
+    {
+      "code": "BCS303",
+      "name": "Discrete Maths",
+      "semester": 3,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "C",
+      "marks": 56
+    },
+    {
+      "code": "BHS301",
+      "name": "Universal Human Values",
+      "semester": 3,
+      "credits": 3,
+      "type": "THEORY",
+      "grade": "B",
+      "marks": 62
+    },
+    {
+      "code": "BCS351",
+      "name": "DS Lab",
+      "semester": 3,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "B+",
+      "marks": 75
+    },
+    {
+      "code": "BCS352",
+      "name": "COA Lab",
+      "semester": 3,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "C",
+      "marks": 59
+    },
+    {
+      "code": "BCS353",
+      "name": "Mini Project",
+      "semester": 3,
+      "credits": 3,
+      "type": "PRACTICAL",
+      "grade": "B",
+      "marks": 61
+    },
+    {
+      "code": "BCS401",
+      "name": "OS",
+      "semester": 4,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "B+",
+      "marks": 75
+    },
+    {
+      "code": "BCS402",
+      "name": "TAFL",
+      "semester": 4,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "F",
+      "marks": 32
+    },
+    {
+      "code": "BCS403",
+      "name": "Microprocessor",
+      "semester": 4,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "B",
+      "marks": 61
+    },
+    {
+      "code": "BCC401",
+      "name": "Cyber Security",
+      "semester": 4,
+      "credits": 3,
+      "type": "THEORY",
+      "grade": "C",
+      "marks": 58
+    },
+    {
+      "code": "BCS451",
+      "name": "OS Lab",
+      "semester": 4,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "C",
+      "marks": 55
+    },
+    {
+      "code": "BCS452",
+      "name": "TAFL Lab",
+      "semester": 4,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "C",
+      "marks": 56
+    },
+    {
+      "code": "BCS453",
+      "name": "Microprocessor Lab",
+      "semester": 4,
+      "credits": 3,
+      "type": "PRACTICAL",
+      "grade": "B",
+      "marks": 65
+    },
+    {
+      "code": "BCS501",
+      "name": "DBMS",
+      "semester": 5,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "F",
+      "marks": 34
+    },
+    {
+      "code": "BCS502",
+      "name": "Compiler Design",
+      "semester": 5,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "B",
+      "marks": 64
+    },
+    {
+      "code": "BCS503",
+      "name": "DAA",
+      "semester": 5,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "B+",
+      "marks": 70
+    },
+    {
+      "code": "BCS504",
+      "name": "Web Tech",
+      "semester": 5,
+      "credits": 3,
+      "type": "THEORY",
+      "grade": "B",
+      "marks": 62
+    },
+    {
+      "code": "BCS551",
+      "name": "DBMS Lab",
+      "semester": 5,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "C",
+      "marks": 56
+    },
+    {
+      "code": "BCS552",
+      "name": "Compiler Lab",
+      "semester": 5,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "B+",
+      "marks": 70
+    },
+    {
+      "code": "BCS553",
+      "name": "DAA Lab",
+      "semester": 5,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "B",
+      "marks": 60
+    },
+    {
+      "code": "BCS554",
+      "name": "Web Tech Lab",
+      "semester": 5,
+      "credits": 2,
+      "type": "PRACTICAL",
+      "grade": "B",
+      "marks": 66
+    },
+    {
+      "code": "BCS601",
+      "name": "Software Engg",
+      "semester": 6,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "B",
+      "marks": 67
+    },
+    {
+      "code": "BCS602",
+      "name": "Computer Networks",
+      "semester": 6,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "C",
+      "marks": 55
+    },
+    {
+      "code": "BCS603",
+      "name": "Cloud Computing",
+      "semester": 6,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "C",
+      "marks": 59
+    },
+    {
+      "code": "BCS604",
+      "name": "Machine Learning",
+      "semester": 6,
+      "credits": 3,
+      "type": "THEORY",
+      "grade": "B",
+      "marks": 69
+    },
+    {
+      "code": "BCS651",
+      "name": "SE Lab",
+      "semester": 6,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "B",
+      "marks": 64
+    },
+    {
+      "code": "BCS652",
+      "name": "CN Lab",
+      "semester": 6,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "C",
+      "marks": 59
+    },
+    {
+      "code": "BCS653",
+      "name": "ML Lab",
+      "semester": 6,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "B+",
+      "marks": 72
+    },
+    {
+      "code": "BCS654",
+      "name": "Presentation",
+      "semester": 6,
+      "credits": 2,
+      "type": "THEORY",
+      "grade": "B",
+      "marks": 67
+    },
+    {
+      "code": "BCS701",
+      "name": "AI",
+      "semester": 7,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "F",
+      "marks": 35
+    },
+    {
+      "code": "BCS702",
+      "name": "Cryptography",
+      "semester": 7,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "B+",
+      "marks": 72
+    },
+    {
+      "code": "BCS703",
+      "name": "Distributed Systems",
+      "semester": 7,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "C",
+      "marks": 56
+    },
+    {
+      "code": "BCS751",
+      "name": "AI Lab",
+      "semester": 7,
+      "credits": 1,
+      "type": "PRACTICAL",
+      "grade": "C",
+      "marks": 57
+    },
+    {
+      "code": "BCS752",
+      "name": "Project I",
+      "semester": 7,
+      "credits": 4,
+      "type": "PRACTICAL",
+      "grade": "B+",
+      "marks": 74
+    },
+    {
+      "code": "BCS753",
+      "name": "Industrial Training",
+      "semester": 7,
+      "credits": 3,
+      "type": "PRACTICAL",
+      "grade": "B+",
+      "marks": 73
+    },
+    {
+      "code": "BCS801",
+      "name": "Big Data",
+      "semester": 8,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "B+",
+      "marks": 74
+    },
+    {
+      "code": "BCS802",
+      "name": "Blockchain",
+      "semester": 8,
+      "credits": 4,
+      "type": "THEORY",
+      "grade": "B",
+      "marks": 62
+    },
+    {
+      "code": "BCS851",
+      "name": "Big Data Lab",
+      "semester": 8,
+      "credits": 2,
+      "type": "PRACTICAL",
+      "grade": "B",
+      "marks": 65
+    },
+    {
+      "code": "BCS852",
+      "name": "Project II",
+      "semester": 8,
+      "credits": 10,
+      "type": "PRACTICAL",
+      "grade": "B+",
+      "marks": 74
+    }
   ]
 }
