@@ -1,4 +1,16 @@
-package com.compass;
+import os
+
+# Update ApiController.java
+with open('src/main/java/com/compass/ApiController.java', 'r') as f:
+    content = f.read()
+
+content = content.replace('"rules/aktu-sample.json"', '"rules/aktu-btech-2018.json"')
+
+with open('src/main/java/com/compass/ApiController.java', 'w') as f:
+    f.write(content)
+
+# Update Models.java
+models_code = """package com.compass;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -8,21 +20,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Models {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public record Rules(
-            String code, String ordinance, AppliesTo appliesToAdmissionYears, String verifiedLevel, String note,
-            int semesterCount, int totalCredits,
+            String code, String ordinance, boolean verified, int semesterCount, int totalCredits,
             List<Double> semesterCredits, Map<String, Integer> grades,
-            int passMinPoints, int maxDurationYears, int maxDurationLateralYears,
-            int passMarksTheory, PassRules passRules, YearPass yearPass, Carry carry, CgpaToPercentage cgpaToPercentage,
+            int passMinPoints, int maxDurationYears,
+            int passMarksTheory,
             PromotionRule promotion, RevaluationRule revaluation,
             List<CycleRule> cycles, int resultDelayDays,
             Map<String, String> sources, List<String> assumptions
     ) {}
-
-    public record AppliesTo(Integer from, Integer to) {}
-    public record PassRules(int theoryEndSemMinPct, int theoryAggregateMinPct, int practicalMinPct) {}
-    public record YearPass(double minSgpa) {}
-    public record Carry(boolean onlyWithEndSemExam) {}
-    public record CgpaToPercentage(double subtract, int multiply) {}
 
     public record PromotionRule(String type) {}
     public record RevaluationRule(boolean theoryOnly, int feePerPaperINR, int nearMissMarks) {}
@@ -74,3 +79,8 @@ public class Models {
             int gap, String verdict, int fee
     ) {}
 }
+"""
+
+with open('src/main/java/com/compass/Models.java', 'w') as f:
+    f.write(models_code)
+

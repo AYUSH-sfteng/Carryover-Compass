@@ -493,6 +493,15 @@
       "code": "BCS851",
       "name": "Big Data Lab",
       "semester": 8,
+      "credits": 6,
+      "type": "PRACTICAL",
+      "grade": "B",
+      "marks": 65
+    },
+    {
+      "code": "BCS851X",
+      "name": "Big Data Lab",
+      "semester": 8,
       "credits": 2,
       "type": "PRACTICAL",
       "grade": "B",
@@ -502,7 +511,7 @@
       "code": "BCS852",
       "name": "Project II",
       "semester": 8,
-      "credits": 10,
+      "credits": 4,
       "type": "PRACTICAL",
       "grade": "B+",
       "marks": 74

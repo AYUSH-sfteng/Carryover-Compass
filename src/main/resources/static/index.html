@@ -55,7 +55,14 @@
                 <label>Last Completed Sem</label>
                 <input type="number" id="lastSem" min="0" max="8">
             </div>
-            <h3>Subjects</h3>
+                        <h3>Subjects</h3>
+            <div class="sub-header-row">
+                <span>Code</span>
+                <span>Sem</span>
+                <span>Credits</span>
+                <span>Grade</span>
+                <span></span>
+            </div>
             <div id="subjectsContainer"></div>
             <button class="btn outline mt-1" onclick="addSubjectRow()">+ Add Subject</button>
             <div class="drawer-actions mt-2">
@@ -83,8 +90,8 @@
 
     <div class="marquee">
         <div class="marquee-content">
-            Carry papers &middot; Credits &middot; Promotion &middot; What-if plans &middot; Revaluation &middot; Deadlines &middot; 
-            Carry papers &middot; Credits &middot; Promotion &middot; What-if plans &middot; Revaluation &middot; Deadlines &middot; 
+            Carry papers &middot; Credits &middot; Promotion &middot; What-if plans &middot; Revaluation &middot; 
+            Carry papers &middot; Credits &middot; Promotion &middot; What-if plans &middot; Revaluation &middot; 
         </div>
     </div>
 
@@ -119,13 +126,20 @@
             <div class="panel tilt">
                 <h3>Promotion</h3>
                 <div id="promoStatus" class="promo-text">...</div>
-                <div class="badge mt-1" id="riskBadge">LOW RISK</div>
+                <div class="badge mt-1" id="riskBadge">Low risk</div>
                 <ul class="risk-reasons mt-1" id="riskReasons"></ul>
             </div>
             <div class="panel wide highlight tilt">
                 <h3>Next Step</h3>
                 <p id="nextActionText" class="big-p">...</p>
             </div>
+            <div class="panel wide tilt" id="rulesPanel">
+                <h3>Rules Used</h3>
+                <div id="rulesList" style="font-size: 0.9em; color: var(--soft); margin-top: 5px;"></div>
+                
+                <ul id="assumptionsList" style="font-size: 0.9em; color: var(--soft);"></ul>
+            </div>
+
         </section>
 
         <section class="route-section" id="route">
@@ -173,7 +187,7 @@
     <footer>
         <p>Your data stays in your browser.</p>
         <p class="disclaimer">Ye ek estimate hai. Final confirmation AKTU ERP/ordinance se karo.</p>
-        <div class="badge warning mt-1">Sample rules, not verified</div>
+        <small class="mt-1" style="display:block; color:var(--soft);">Sample rules, not verified</small>
     </footer>
 
     <script src="app.js"></script>

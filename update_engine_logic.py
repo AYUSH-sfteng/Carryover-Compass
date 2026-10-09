@@ -1,4 +1,10 @@
-package com.compass;
+import os
+
+with open('src/main/java/com/compass/Engine.java', 'r') as f:
+    original = f.read()
+
+# I will replace the analyze and simulatePlan methods
+engine_java = """package com.compass;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -247,3 +253,7 @@ public class Engine {
         return new Models.Plan(name, graduationDate, monthsLate, timeline);
     }
 }
+"""
+
+with open('src/main/java/com/compass/Engine.java', 'w') as f:
+    f.write(engine_java)

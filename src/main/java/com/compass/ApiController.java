@@ -15,19 +15,21 @@ import java.util.List;
 @RequestMapping("/api")
 public class ApiController {
     
-    private final Models.Rules rules;
+    private final Models.Rules rules2018;
+    private final Models.Rules rules2024;
     private final Models.Student demoStudent;
-    private final Engine engine;
 
     public ApiController() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        try (InputStream is = new ClassPathResource("rules/aktu-sample.json").getInputStream()) {
-            this.rules = mapper.readValue(is, Models.Rules.class);
+        try (InputStream is = new ClassPathResource("rules/aktu-btech-2018.json").getInputStream()) {
+            this.rules2018 = mapper.readValue(is, Models.Rules.class);
+        }
+        try (InputStream is = new ClassPathResource("rules/aktu-btech-nep-2024.json").getInputStream()) {
+            this.rules2024 = mapper.readValue(is, Models.Rules.class);
         }
         try (InputStream is = new ClassPathResource("demo/demo-student.json").getInputStream()) {
             this.demoStudent = mapper.readValue(is, Models.Student.class);
         }
-        this.engine = new Engine(this.rules);
     }
 
     @GetMapping("/demo")
@@ -37,7 +39,7 @@ public class ApiController {
 
     @GetMapping("/rules")
     public Models.Rules getRules() {
-        return rules;
+        return rules2018; // Default fallback for generic rule fetch
     }
 
     @PostMapping("/analyze")
@@ -45,6 +47,8 @@ public class ApiController {
         List<String> errors = new ArrayList<>();
         Models.Student s = request.student();
         if (s == null) return ResponseEntity.badRequest().body(List.of("Student data missing."));
+        
+        Models.Rules rules = (s.admissionYear() >= 2024) ? rules2024 : rules2018;
         
         if (s.lastCompletedSemester() < 0 || s.lastCompletedSemester() > rules.semesterCount()) {
             errors.add("Invalid lastCompletedSemester (must be 0 to " + rules.semesterCount() + ").");
@@ -55,12 +59,6 @@ public class ApiController {
                 if (!rules.grades().containsKey(sub.grade())) {
                     errors.add("Unknown grade '" + sub.grade() + "' in subject " + sub.code());
                 }
-                if (sub.credits() < 0 || sub.credits() > 6) {
-                    errors.add("Invalid credits (" + sub.credits() + ") in subject " + sub.code() + ", must be 0..6");
-                }
-                if (sub.semester() < 1 || sub.semester() > rules.semesterCount()) {
-                    errors.add("Invalid semester (" + sub.semester() + ") in subject " + sub.code() + ", must be 1.." + rules.semesterCount());
-                }
             }
         }
         
@@ -69,6 +67,7 @@ public class ApiController {
         }
         
         int clearsPerCycle = request.clearsPerCycle() != null ? request.clearsPerCycle() : 2;
+        Engine engine = new Engine(rules);
         Models.AnalyzeResponse response = engine.analyze(s, clearsPerCycle);
         return ResponseEntity.ok(response);
     }

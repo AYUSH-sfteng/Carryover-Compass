@@ -1,0 +1,87 @@
+{
+  "code": "AKTU_BTECH_NEP_2024",
+  "ordinance": "AKTU B.Tech AICTE Model Curriculum Ordinance, effective 2018-19",
+  "appliesToAdmissionYears": {
+    "from": 2024
+  },
+  "verifiedLevel": "none",
+  "semesterCount": 8,
+  "totalCredits": 160,
+  "semesterCredits": [
+    17.5,
+    20.5,
+    21,
+    21,
+    21,
+    21,
+    20,
+    18
+  ],
+  "grades": {
+    "A+": 10,
+    "A": 9,
+    "B+": 8,
+    "B": 7,
+    "C": 6,
+    "D": 5,
+    "E": 4,
+    "F": 0
+  },
+  "passMinPoints": 4,
+  "passRules": {
+    "theoryEndSemMinPct": 30,
+    "theoryAggregateMinPct": 40,
+    "practicalMinPct": 50
+  },
+  "maxDurationYears": 7,
+  "maxDurationLateralYears": 6,
+  "promotion": {
+    "type": "YEAR_CREDITS"
+  },
+  "yearPass": {
+    "minSgpa": 5.0
+  },
+  "carry": {
+    "onlyWithEndSemExam": true
+  },
+  "revaluation": {
+    "theoryOnly": true,
+    "feePerPaperINR": 500,
+    "nearMissMarks": 5
+  },
+  "cgpaToPercentage": {
+    "subtract": 0.75,
+    "multiply": 10
+  },
+  "cycles": [
+    {
+      "type": "EVEN",
+      "month": 6
+    },
+    {
+      "type": "ODD",
+      "month": 12
+    }
+  ],
+  "resultDelayDays": 50,
+  "sources": {
+    "totalCredits": "cl. 4.4, 9.9",
+    "maxDurationYears": "cl. 4.2",
+    "grades": "cl. 14.1",
+    "passRules": "cl. 9.1",
+    "promotion": "cl. 10.1, 10.2",
+    "yearPass": "cl. 10.3",
+    "carry": "cl. 11.1, 11.2",
+    "revaluation": "cl. 17.1",
+    "cgpaToPercentage": "cl. 15"
+  },
+  "assumptions": [
+    "semesterCredits: ordinance illustration, not the CSE scheme (CSE Sem V=22, VI=21)",
+    "feePerPaperINR: circular not found",
+    "revaluation time limit and grace marks: not found",
+    "cycles months and resultDelayDays",
+    "nearMissMarks: app heuristic",
+    "carry papers cleared only in same-parity cycle: interpretation of cl. 11.1(a)"
+  ],
+  "note": "Official NEP ordinance not found. Estimate using 2018 rules."
+}

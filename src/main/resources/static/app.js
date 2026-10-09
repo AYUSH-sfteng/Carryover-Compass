@@ -137,9 +137,13 @@ function render() {
     const bChips = document.getElementById('backlogChips');
     bChips.innerHTML = a.backlogs.map(b => `<span class="chip amber">${b.code}</span>`).join(' ');
 
-    document.getElementById('promoStatus').innerText = a.promotion.message;
+    let pMsg = a.promotion.message;
+    if (state.student.lastCompletedSemester === state.rules.semesterCount) {
+        pMsg = 'Saare semester complete. Degree ke liye backlogs clear karne hain.';
+    }
+    document.getElementById('promoStatus').innerText = pMsg;
     const rBadge = document.getElementById('riskBadge');
-    rBadge.innerText = a.risk.level + ' RISK';
+    rBadge.innerText = a.risk.level.charAt(0).toUpperCase() + a.risk.level.slice(1).toLowerCase() + ' risk';
     rBadge.className = 'badge risk-' + a.risk.level;
     document.getElementById('riskReasons').innerHTML = a.risk.reasons.map(r => `<li>${r}</li>`).join('');
 
@@ -160,15 +164,40 @@ function render() {
     stContainer.innerHTML = stHtml;
 
     // Plans
+    // Sort plans by graduation date to find the fastest
+    let fastestPlanIndex = -1;
+    let minDate = Infinity;
+    a.plans.forEach((p, i) => {
+        if (p.graduation) {
+            let d = new Date(p.graduation).getTime();
+            if (d < minDate) { minDate = d; fastestPlanIndex = i; }
+        }
+    });
+
     const pCont = document.getElementById('plansContainer');
-    pCont.innerHTML = a.plans.map(p => {
-        const dateStr = p.graduation ? new Date(p.graduation).toLocaleDateString() : 'N/A';
-        const pct = p.graduation ? Math.min(100, 100 - (p.monthsLate * 2)) : 0;
+    pCont.innerHTML = a.plans.map((p, i) => {
+        let dateStr = 'N/A';
+        if (p.graduation) {
+            const d = new Date(p.graduation);
+            const m = d.toLocaleString('en-US', { month: 'short' });
+            dateStr = m + ' ' + d.getFullYear();
+        }
+        
+        let lateText = p.monthsLate === 0 ? 'On time' : '+' + p.monthsLate + ' month' + (p.monthsLate === 1 ? '' : 's') + ' late';
+        
+        // Progress bar: length is proportional to months until graduation
+        let msUntil = p.graduation ? new Date(p.graduation).getTime() - new Date().getTime() : 0;
+        let monthsUntil = Math.max(0, msUntil / (1000 * 60 * 60 * 24 * 30));
+        let maxMonths = 36;
+        let pct = p.graduation ? Math.max(10, 100 - (monthsUntil / maxMonths * 100)) : 0;
+        
+        let tag = (i === fastestPlanIndex) ? ' <span class="chip green" style="margin-left:8px;font-size:10px;">Fastest</span>' : '';
+        
         return `
             <div class="plan-row">
-                <div class="plan-name">${p.name}</div>
+                <div class="plan-name">${p.name}${tag}</div>
                 <div class="plan-track"><div class="plan-progress" style="width: ${pct}%"></div></div>
-                <div class="plan-result">${dateStr} <br><small>${p.monthsLate}mo late</small></div>
+                <div class="plan-result">${dateStr} <br><small>${lateText}</small></div>
             </div>
         `;
     }).join('');
@@ -178,7 +207,9 @@ function render() {
     const rBody = document.getElementById('revalBody');
     rBody.innerHTML = a.revaluation.map(r => {
         let cClass = r.verdict === 'WORTH_CONSIDERING' ? 'green' : r.verdict === 'UNLIKELY' ? 'red' : 'amber';
-        let vText = r.verdict.replace('_', ' ');
+        let vText = r.verdict === 'NEED_MARKS' ? 'Add marks' : r.verdict.replace('_', ' ');
+        // Sentence case for vText
+        vText = vText.charAt(0).toUpperCase() + vText.slice(1).toLowerCase();
         return `<tr>
             <td>${r.code} - ${r.name}</td>
             <td>${r.marks || '-'}</td>
@@ -188,6 +219,66 @@ function render() {
     }).join('');
     
     // Populate Drawer
+    
+    // Rules Panel and Badges
+    if (a.rules) {
+        const isNep = state.student.admissionYear >= 2024;
+        const badgeText = isNep 
+            ? "NEP batch: rules not verified, estimate only" 
+            : "Rules: AKTU ordinance 2018-19, clause-referenced";
+        const badgeClass = isNep ? "badge amber" : "badge blue";
+        
+        const topBadge = document.querySelector('.nav-right .badge');
+        if (topBadge) {
+            topBadge.innerText = badgeText;
+            topBadge.className = badgeClass;
+        }
+        
+        const footerBadge = document.querySelector('footer small');
+        if (footerBadge) {
+            footerBadge.innerText = badgeText;
+            footerBadge.style.color = isNep ? "var(--amber)" : "var(--blue, #3b82f6)";
+        }
+        
+        const rulesList = document.getElementById('rulesList');
+        const assumptionsList = document.getElementById('assumptionsList');
+        
+        let fromOrd = [];
+        let notFound = [];
+        let assumpt = [];
+        
+        if (a.rules.sources) {
+            for (let k in a.rules.sources) {
+                let v = a.rules.sources[k];
+                if (v.toLowerCase().includes("not found")) {
+                    notFound.push(`${k}: ${v}`);
+                } else {
+                    fromOrd.push(`<strong>${k}</strong>: ${v}`);
+                }
+            }
+        }
+        if (a.rules.assumptions) {
+            a.rules.assumptions.forEach(v => {
+                if (v.toLowerCase().includes("not found")) notFound.push(v);
+                else assumpt.push(v);
+            });
+        }
+        
+        let htmlStr = '';
+        if (fromOrd.length > 0) {
+            htmlStr += `<div style="margin-top: 10px; font-weight: 600;">From ordinance text</div><ul>` + fromOrd.map(x => `<li>${x}</li>`).join('') + `</ul>`;
+        }
+        if (assumpt.length > 0) {
+            htmlStr += `<div style="margin-top: 10px; font-weight: 600;">Assumptions</div><ul>` + assumpt.map(x => `<li>${x}</li>`).join('') + `</ul>`;
+        }
+        if (notFound.length > 0) {
+            htmlStr += `<div style="margin-top: 10px; font-weight: 600;">Not found</div><ul>` + notFound.map(x => `<li>${x}</li>`).join('') + `</ul>`;
+        }
+        
+        if (rulesList) rulesList.innerHTML = htmlStr;
+        if (assumptionsList) assumptionsList.innerHTML = ''; // cleared as combined
+    }
+
     populateDrawer(state.student);
 }
 
@@ -215,10 +306,10 @@ function toggleDrawer() {
 
 function getSubRow(s = {code:'', semester:1, credits:4, type:'THEORY', grade:'C', marks:''}) {
     return `<div class="sub-row">
-        <input type="text" placeholder="Code" value="${s.code}" class="s-code">
-        <input type="number" placeholder="Sem" value="${s.semester}" class="s-sem">
-        <input type="number" placeholder="Cr" value="${s.credits}" class="s-cr">
-        <select class="s-grade"><option value="O" ${s.grade=='O'?'selected':''}>O</option><option value="A+" ${s.grade=='A+'?'selected':''}>A+</option><option value="A" ${s.grade=='A'?'selected':''}>A</option><option value="B+" ${s.grade=='B+'?'selected':''}>B+</option><option value="B" ${s.grade=='B'?'selected':''}>B</option><option value="C" ${s.grade=='C'?'selected':''}>C</option><option value="F" ${s.grade=='F'?'selected':''}>F</option></select>
+        <input type="text" placeholder="e.g. BAS101" title="e.g. BAS101" value="${s.code}" class="s-code">
+        <input type="number" placeholder="Sem" title="Semester 1-8" value="${s.semester}" class="s-sem">
+        <input type="number" placeholder="Cr" title="Credits 1-6" value="${s.credits}" class="s-cr">
+        <select class="s-grade" title="Grade"><option value="A+" ${s.grade=='A+'?'selected':''}>A+</option><option value="A" ${s.grade=='A'?'selected':''}>A</option><option value="B+" ${s.grade=='B+'?'selected':''}>B+</option><option value="B" ${s.grade=='B'?'selected':''}>B</option><option value="C" ${s.grade=='C'?'selected':''}>C</option><option value="D" ${s.grade=='D'?'selected':''}>D</option><option value="E" ${s.grade=='E'?'selected':''}>E</option><option value="F" ${s.grade=='F'?'selected':''}>F</option></select>
         <button class="btn icon" onclick="this.parentElement.remove()">&times;</button>
     </div>`;
 }
