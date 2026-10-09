@@ -55,7 +55,7 @@
                 <label>Last Completed Sem</label>
                 <input type="number" id="lastSem" min="0" max="8">
             </div>
-                        <h3>Subjects</h3>
+            <h3 style="margin-bottom:1rem; margin-top:2rem;">Subjects</h3>
             <div class="sub-header-row">
                 <span>Code</span>
                 <span>Sem</span>
@@ -65,10 +65,10 @@
             </div>
             <div id="subjectsContainer"></div>
             <button class="btn outline mt-1" onclick="addSubjectRow()">+ Add Subject</button>
-            <div class="drawer-actions mt-2">
-                <button class="btn primary" onclick="saveMyResults()">Apply</button>
-                <button class="btn ghost" onclick="clearMyResults()">Clear</button>
-            </div>
+        </div>
+        <div class="drawer-footer">
+            <button class="btn primary" onclick="saveMyResults()">Apply</button>
+            <button class="btn ghost" onclick="clearMyResults()">Clear</button>
         </div>
     </div>
 

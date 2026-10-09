@@ -83,5 +83,6 @@
     "cycles months and resultDelayDays",
     "nearMissMarks: app heuristic",
     "carry papers cleared only in same-parity cycle: interpretation of cl. 11.1(a)"
-  ]
+  ],
+  "passMarksTheory": 40
 }

@@ -130,17 +130,21 @@ public class Engine {
             if (rules.revaluation() != null && rules.revaluation().theoryOnly() && !"THEORY".equalsIgnoreCase(b.type())) {
                 continue;
             }
+            if (!"THEORY".equalsIgnoreCase(b.type())) continue; // Only THEORY subjects
             if (b.marks() != null) {
-                int passMark = "THEORY".equalsIgnoreCase(b.type()) ? rules.passMarksTheory() : 0;
+                Integer pm = rules.passMarksTheory();
+                if (pm == null || pm == 0) {
+                    throw new IllegalStateException("Pass mark for THEORY is missing or 0");
+                }
+                int passMark = pm;
                 int gap = passMark - b.marks();
                 String verdict = "UNLIKELY";
-                if (rules.revaluation() != null && gap <= rules.revaluation().nearMissMarks() && gap > 0) {
+                int fee = 0;
+                if (gap <= 5) {
                     verdict = "WORTH_CONSIDERING";
-                    revalTotalFee += rules.revaluation().feePerPaperINR();
-                } else if (gap <= 0) {
-                    verdict = "UNLIKELY";
+                    fee = 500;
+                    revalTotalFee += fee;
                 }
-                int fee = rules.revaluation() != null ? rules.revaluation().feePerPaperINR() : 0;
                 revaluation.add(new Models.RevalAdvice(b.code(), b.name(), b.marks(), passMark, gap, verdict, fee));
             } else {
                 revaluation.add(new Models.RevalAdvice(b.code(), b.name(), 0, 0, 0, "NEED_MARKS", 0));

@@ -83,5 +83,6 @@
     "nearMissMarks: app heuristic",
     "carry papers cleared only in same-parity cycle: interpretation of cl. 11.1(a)"
   ],
-  "note": "Official NEP ordinance not found. Estimate using 2018 rules."
+  "note": "Official NEP ordinance not found. Estimate using 2018 rules.",
+  "passMarksTheory": 40
 }

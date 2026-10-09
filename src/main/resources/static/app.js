@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    const saved = localStorage.getItem('compassStudent');
+    const saved = localStorage.getItem('compass.student.v2');
     if (saved) {
         state.student = JSON.parse(saved);
         analyze();
@@ -94,7 +94,7 @@ async function loadDemo() {
     try {
         const res = await fetch('/api/demo');
         state.student = await res.json();
-        localStorage.setItem('compassStudent', JSON.stringify(state.student));
+        localStorage.setItem('compass.student.v2', JSON.stringify(state.student));
         analyze();
     } catch(e) { alert("Failed to load demo"); }
 }
@@ -304,7 +304,7 @@ function toggleDrawer() {
     document.getElementById('drawerOverlay').classList.toggle('open');
 }
 
-function getSubRow(s = {code:'', semester:1, credits:4, type:'THEORY', grade:'C', marks:''}) {
+function getSubRow(s = {code:'', semester:1, credits:4, type:'THEORY', grade:'C', marks:null, name:''}) {
     return `<div class="sub-row">
         <input type="text" placeholder="e.g. BAS101" title="e.g. BAS101" value="${s.code}" class="s-code">
         <input type="number" placeholder="Sem" title="Semester 1-8" value="${s.semester}" class="s-sem">
@@ -325,25 +325,29 @@ function saveMyResults() {
         lastCompletedSemester: parseInt(document.getElementById('lastSem').value || 1),
         subjects: []
     };
+    // Match with existing student subjects to preserve hidden fields
+    let oldSubjects = (state.student && state.student.subjects) ? state.student.subjects : 
+                      ((state.demoStudent && state.demoStudent.subjects) ? state.demoStudent.subjects : []);
+    
     document.querySelectorAll('.sub-row').forEach(row => {
+        let c = row.querySelector('.s-code').value;
+        let old = oldSubjects.find(x => x.code === c) || { name: "", type: "THEORY", marks: null };
         s.subjects.push({
-            code: row.querySelector('.s-code').value,
-            name: '',
+            ...old,
+            code: c,
             semester: parseInt(row.querySelector('.s-sem').value || 1),
             credits: parseInt(row.querySelector('.s-cr').value || 4),
-            type: 'THEORY',
-            grade: row.querySelector('.s-grade').value,
-            marks: 0
+            grade: row.querySelector('.s-grade').value
         });
     });
     state.student = s;
-    localStorage.setItem('compassStudent', JSON.stringify(s));
+    localStorage.setItem('compass.student.v2', JSON.stringify(s));
     toggleDrawer();
     analyze();
 }
 
 function clearMyResults() {
-    localStorage.removeItem('compassStudent');
+    localStorage.removeItem('compass.student.v2');
     state.student = null;
     state.analysis = null;
     if (state.demoStudent) populateDrawer(state.demoStudent);
